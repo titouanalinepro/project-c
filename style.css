@@ -1,60 +1,302 @@
+/* ==========================================================
+   Nos souvenirs
+   CSS moderne (variables + imbrication native) : tu peux aussi
+   coller ce fichier tel quel dans scss/style.scss.
+   ========================================================== */
+
+:root {
+  --nuit: #0e1320;
+  --nuit-haute: #172033;
+  --papier: #ece4d4;
+  --brume: #a6abbb;
+  --or: #d2ad5c;
+  --rose: #e29aa6;
+
+  --titre: "Gloock", Georgia, "Times New Roman", serif;
+  --texte: "Hanken Grotesk", system-ui, sans-serif;
+
+  --marge: clamp(1.25rem, 5vw, 4rem);
+  --largeur: 68rem;
+  --trait: 1px solid rgb(236 228 212 / 0.14);
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-body {
-  font-family: system-ui, sans-serif;
-  background: #0f1115;
-  color: #e8e8e8;
-  line-height: 1.6;
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 1.5rem;
 }
 
-nav {
+body {
+  font-family: var(--texte);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  background: var(--nuit);
+  color: var(--papier);
+}
+
+a {
+  color: inherit;
+}
+
+a:focus-visible {
+  outline: 2px solid var(--or);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Colonne centrale commune à tous les blocs */
+.entete,
+.hero,
+.chapitre,
+.pied {
+  width: min(100% - 2 * var(--marge), var(--largeur));
+  margin-inline: auto;
+}
+
+/* ---------- Lien d'évitement (clavier) ---------- */
+.skip {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  padding: 0.5rem 1rem;
+  background: var(--or);
+  color: var(--nuit);
+  text-decoration: none;
+  z-index: 10;
+
+  &:focus {
+    top: 1rem;
+  }
+}
+
+/* ---------- En-tête ---------- */
+.entete {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.2rem 2rem;
-}
-nav ul {
-  display: flex;
-  gap: 1.5rem;
-  list-style: none;
-}
-nav a {
-  color: inherit;
-  text-decoration: none;
-}
-.logo {
-  font-weight: 700;
-  font-size: 1.2rem;
-}
-
-.hero {
-  min-height: 70vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
   gap: 1rem;
-  padding: 2rem;
-}
-.hero h1 {
-  font-size: clamp(2rem, 6vw, 4rem);
+  padding-block: 1.5rem;
+
+  nav ul {
+    display: flex;
+    gap: 1.75rem;
+    list-style: none;
+  }
+
+  nav a {
+    color: var(--brume);
+    text-decoration: none;
+    padding-bottom: 0.15rem;
+    border-bottom: 1px solid transparent;
+
+    &:hover {
+      color: var(--papier);
+      border-bottom-color: var(--or);
+    }
+  }
 }
 
-.btn {
-  background: #6c8cff;
-  color: #fff;
-  padding: 0.8rem 1.6rem;
-  border-radius: 8px;
+.logo {
+  font-family: var(--titre);
+  font-size: 1.25rem;
   text-decoration: none;
 }
 
-section:not(.hero) {
-  max-width: 700px;
-  margin: 0 auto;
-  padding: 4rem 2rem;
+/* ---------- Accueil ---------- */
+.hero {
+  padding-block: clamp(4rem, 14vw, 9rem) clamp(3.5rem, 9vw, 6.5rem);
+
+  h1 {
+    font-family: var(--titre);
+    font-weight: 400;
+    font-size: clamp(2.5rem, 7.5vw, 5.75rem);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    max-width: 13em;
+    text-wrap: balance;
+  }
+
+  p {
+    margin-top: 1.75rem;
+    max-width: 34rem;
+    font-size: 1.15rem;
+    color: var(--brume);
+  }
+}
+
+.lien {
+  display: inline-block;
+  margin-top: 2rem;
+  padding-bottom: 0.15rem;
+  color: var(--or);
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+
+  &:hover {
+    color: var(--papier);
+  }
+}
+
+/* ---------- Chapitres ---------- */
+.chapitre {
+  padding-block: clamp(3rem, 8vw, 5rem);
+  border-top: var(--trait);
+}
+
+.chapitre-tete {
+  margin-bottom: clamp(2.5rem, 6vw, 4.5rem);
+
+  h2 {
+    font-family: var(--titre);
+    font-weight: 400;
+    font-size: clamp(1.8rem, 4vw, 2.75rem);
+    line-height: 1.15;
+    text-wrap: balance;
+  }
+
+  p {
+    margin-top: 0.75rem;
+    max-width: 34rem;
+    color: var(--brume);
+  }
+}
+
+/* ---------- Films ---------- */
+.films {
+  list-style: none;
+  display: grid;
+  gap: clamp(3.5rem, 9vw, 6rem);
+}
+
+.film {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+.affiche {
+  position: relative;
+  width: min(100%, 15rem);
+  aspect-ratio: 2 / 3;
+  margin: 0.6rem; /* laisse la place au cadre doré */
+  background: var(--nuit-haute);
+  border-radius: 3px;
+  outline: 1px solid var(--or);
+  outline-offset: 0.6rem;
+  box-shadow: 0 1.2rem 2.5rem rgb(0 0 0 / 0.45);
+  rotate: -1.2deg;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+
+    &.est-charge {
+      opacity: 1;
+    }
+  }
+}
+
+/* Affiche absente : le titre prend la place */
+.affiche--vide {
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+  text-align: center;
+  font-family: var(--titre);
+  font-size: 1.4rem;
+  line-height: 1.2;
+  color: var(--or);
+}
+
+.film-texte {
+  h3 {
+    font-family: var(--titre);
+    font-weight: 400;
+    font-size: clamp(1.6rem, 3.5vw, 2.25rem);
+    line-height: 1.15;
+    text-wrap: balance;
+  }
+
+  dl {
+    margin-top: 1.25rem;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.25rem 1rem;
+  }
+
+  dt {
+    color: var(--brume);
+  }
+
+  dd {
+    margin: 0;
+  }
+
+  blockquote {
+    margin-top: 1.5rem;
+    padding-left: 1.25rem;
+    max-width: 34rem;
+    border-left: 2px solid var(--rose);
+    font-style: italic;
+  }
+}
+
+.film-annee {
+  margin-top: 0.25rem;
+  color: var(--brume);
+}
+
+.vide {
+  color: var(--brume);
+}
+
+@media (min-width: 48rem) {
+  .film {
+    grid-template-columns: 17rem 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .affiche {
+    width: 100%;
+  }
+
+  /* Une ligne sur deux : affiche à droite, comme les pages d'un livre */
+  .film:nth-child(even) {
+    grid-template-columns: 1fr 17rem;
+
+    .affiche {
+      order: 2;
+      rotate: 1.2deg;
+    }
+  }
+}
+
+/* ---------- Pied de page ---------- */
+.pied {
+  padding-block: 2.5rem 3rem;
+  border-top: var(--trait);
+  font-size: 0.875rem;
+  color: var(--brume);
+}
+
+/* ---------- Accessibilité : moins de mouvement ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .affiche img {
+    transition: none;
+  }
 }

@@ -3,36 +3,66 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Mon site</title>
+    <title>Nos souvenirs</title>
+    <meta name="theme-color" content="#0e1320" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Gloock&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,700;1,400&display=swap"
+      rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
+
+    <script src="js/config.js" defer></script>
+    <script src="js/main.js" defer></script>
   </head>
+
   <body>
-    <header>
-      <nav>
-        <a href="#" class="logo">MonSite</a>
+    <a class="skip" href="#films">Aller aux films</a>
+
+    <header class="entete">
+      <a href="#" class="logo">Nos souvenirs</a>
+      <nav aria-label="Principal">
         <ul>
-          <li><a href="#about">À propos</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="#films">Films Disney</a></li>
+          <!-- Nouveau chapitre : ajoute un <li> ici avec un lien vers son id -->
         </ul>
       </nav>
     </header>
 
     <main>
       <section class="hero">
-        <h1>Bienvenue sur mon site</h1>
-        <p>Une courte phrase qui explique ce que vous faites.</p>
-        <a href="#contact" class="btn">Me contacter</a>
+        <h1>
+          Cela fait <span id="duree">longtemps</span> qu'on écrit notre
+          histoire.
+        </h1>
+        <p>
+          Ici, on range nos films, nos sorties et nos petits moments. On
+          commence par les films Disney qu'on a vus ensemble.
+        </p>
+        <a class="lien" href="#films">Voir les films</a>
       </section>
 
-      <section id="about">
-        <h2>À propos</h2>
-        <p>Présentez-vous ici.</p>
-      </section>
+      <!--
+        Chapitre : copie ce bloc <section class="chapitre"> pour en créer
+        un nouveau (voyages, concerts, restaurants...).
+      -->
+      <section class="chapitre" id="films" aria-labelledby="titre-films">
+        <header class="chapitre-tete">
+          <h2 id="titre-films">Les films Disney vus ensemble</h2>
+          <p>Chaque film garde sa date et un souvenir de la soirée.</p>
+        </header>
 
-      <section id="contact">
-        <h2>Contact</h2>
-        <p>votre@email.com</p>
+        <!-- Rempli par js/main.js à partir de la liste FILMS -->
+        <ol class="films" id="liste-films"></ol>
       </section>
     </main>
+
+    <footer class="pied">
+      <p>
+        Ce site utilise l'API TMDB pour les affiches, mais n'est ni approuvé ni
+        certifié par TMDB.
+      </p>
+    </footer>
   </body>
 </html>
